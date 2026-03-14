@@ -38,11 +38,13 @@ src
         ├ controllers
         │   └ auth.controller.js
         ├ services
-        │   └ auth.service.js
+    │   └ auth.services.js
         ├ models
-        │   └ user.model.js
+    │   └ auth.model.js
         ├ routes
-        │   └ auth.routes.js
+    │   └ auth.route.js
+    ├ middleware
+    │   └ blacklisted.js
         └ strategies
             └ google.strategy.js
 ```
@@ -144,9 +146,21 @@ Response
 
 ```json
 {
-  "user": {...},
-  "accessToken": "jwt",
-  "refreshToken": "jwt"
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "user": {
+      "id": "...",
+      "name": "Aryan",
+      "email": "aryan@email.com",
+      "avatar": null,
+      "provider": "email",
+      "provider_id": null,
+      "created_at": "..."
+    },
+    "accessToken": "jwt",
+    "refreshToken": "jwt"
+  }
 }
 ```
 
@@ -171,9 +185,21 @@ Response
 
 ```json
 {
-  "user": {...},
-  "accessToken": "jwt",
-  "refreshToken": "jwt"
+  "success": true,
+  "message": "User logged in successfully",
+  "data": {
+    "user": {
+      "id": "...",
+      "name": "Aryan",
+      "email": "aryan@email.com",
+      "avatar": null,
+      "provider": "email",
+      "provider_id": null,
+      "created_at": "..."
+    },
+    "accessToken": "jwt",
+    "refreshToken": "jwt"
+  }
 }
 ```
 
@@ -191,10 +217,31 @@ Headers
 Authorization: Bearer <access_token>
 ```
 
+Optional body
+
+```json
+{
+  "refreshToken": "jwt"
+}
+```
+
+Response
+
+```json
+{
+  "success": true,
+  "message": "Logged out successfully",
+  "data": {
+    "loggedOut": true
+  }
+}
+```
+
 Behavior
 
 * Token is added to blacklist
-* Refresh token removed
+* Provided refresh token is removed
+* If no refresh token is provided, all refresh tokens for the authenticated user are removed
 
 ---
 
@@ -218,6 +265,28 @@ Callback route:
 GET /api/auth/google/callback
 ```
 
+Response
+
+```json
+{
+  "success": true,
+  "message": "Google login successful",
+  "data": {
+    "user": {
+      "id": "...",
+      "name": "Aryan",
+      "email": "aryan@email.com",
+      "avatar": "https://...",
+      "provider": "google",
+      "provider_id": "google-user-id",
+      "created_at": "..."
+    },
+    "accessToken": "jwt",
+    "refreshToken": "jwt"
+  }
+}
+```
+
 ---
 
 # Protected Routes
@@ -234,6 +303,15 @@ The middleware verifies:
 
 * token validity
 * blacklist status
+
+Error response format:
+
+```json
+{
+  "success": false,
+  "message": "Authorization token is required"
+}
+```
 
 ---
 

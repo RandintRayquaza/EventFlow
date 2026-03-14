@@ -1,29 +1,37 @@
 import jwt from "jsonwebtoken"
-import { pool } from "../config/db.js"
+import { sendError } from "../../../utils/api-response.js"
+import { isTokenBlacklisted } from "../models/auth.model.js"
+import { getBearerToken } from "../utils/auth.utils.js"
 
 export const verifyToken = async (req, res, next) => {
-
-  const token = req.headers.authorization?.split(" ")[1]
-
-  if (!token) {
-    return res.status(401).json({ error: "No token provided" })
-  }
-
-  const blacklisted = await pool.query(
-    "SELECT * FROM token_blacklist WHERE token=$1",
-    [token]
-  )
-
-  if (blacklisted.rows.length) {
-    return res.status(401).json({ error: "Token invalidated" })
-  }
-
   try {
+    const token = getBearerToken(req.headers.authorization)
+
+    if (!token) {
+      return sendError(res, {
+        statusCode: 401,
+        message: "Authorization token is required",
+      })
+    }
+
+    const blacklisted = await isTokenBlacklisted(token)
+
+    if (blacklisted) {
+      return sendError(res, {
+        statusCode: 401,
+        message: "Token has been invalidated",
+      })
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     req.user = decoded
-    next()
-  } catch (err) {
-    res.status(401).json({ error: "Invalid token" })
-  }
+    req.token = token
 
+    next()
+  } catch (error) {
+    return sendError(res, {
+      statusCode: 401,
+      message: "Invalid token",
+    })
+  }
 }
