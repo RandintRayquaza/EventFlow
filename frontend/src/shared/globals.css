@@ -1,96 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
 @import "tailwindcss";
 
-/* EventFlow Theme */
-
 :root {
-
-  /* Background */
   --color-bg: #070b08;
-  --color-surface: #0f1411;
-  --color-card: #121815;
-
-  /* Brand Green */
   --color-primary: #22c55e;
-  --color-primary-hover: #16a34a;
-
-  /* Accent Neon */
   --color-accent: #4ade80;
-
-  /* Glow color */
-  --color-glow: rgba(34, 197, 94, 0.35);
-
-  /* Text */
   --color-text: #f5f5f5;
-  --color-text-muted: #9ca3af;
+  --color-text-muted: #93a69b;
+  --color-surface: #0e140f;
+  --color-surface-strong: #111913;
+  --color-border: #1b3326;
+}
 
-  /* Borders */
-  --color-border: #1f2937;
+* {
+  box-sizing: border-box;
+}
 
-  /* Gradient */
-  --color-gradient: linear-gradient(
-    135deg,
-    #22c55e,
-    #4ade80
-  );
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
 body {
-  background: var(--color-bg);
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(34, 197, 94, 0.12), transparent 34%),
+    radial-gradient(circle at 90% 10%, rgba(74, 222, 128, 0.08), transparent 32%),
+    var(--color-bg);
   color: var(--color-text);
-  font-family: "Inter", sans-serif;
+  font-family: "Manrope", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
-
-/* Links */
 
 a {
-  color: var(--color-primary);
-  transition: color 0.2s ease;
+  color: inherit;
+  text-decoration: none;
 }
 
-a:hover {
-  color: var(--color-primary-hover);
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Buttons */
-
-.btn-primary {
-  background: var(--color-gradient);
-  color: black;
-  padding: 0.7rem 1.3rem;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.2s ease;
+.marquee-track {
+  animation: marquee 16s linear infinite;
 }
 
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 20px var(--color-glow);
-}
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
 
-
-
-
-.card {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 20px rgba(34,197,94,0.12);
-}
-
-/* Section spacing */
-
-.section {
-  padding: 6rem 2rem;
-}
-
-/* Container */
-
-.container {
-  max-width: 1200px;
-  margin: auto;
+  to {
+    transform: translateX(-50%);
+  }
 }
