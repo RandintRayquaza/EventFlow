@@ -21,25 +21,49 @@ export const registerUser = async ({ name, email, password }) => {
   return user
 }
 
+
+
 export const loginUser = async ({ email, password }) => {
 
-  const user = await findUserByEmail(email)
+  const result = await pool.query(
+    "SELECT * FROM users WHERE email=$1",
+    [email]
+  )
+
+  const user = result.rows[0]
 
   if (!user) {
     throw new Error("User not found")
   }
 
-  const isMatch = await bcrypt.compare(password, user.password)
+  const match = await bcrypt.compare(password, user.password)
 
-  if (!isMatch) {
+  if (!match) {
     throw new Error("Invalid password")
   }
 
-  const token = jwt.sign(
+  const accessToken = jwt.sign(
     { id: user.id },
     process.env.JWT_SECRET,
+    { expiresIn: "15m" }
+  )
+
+  const refreshToken = jwt.sign(
+    { id: user.id },
+    process.env.JWT_REFRESH_SECRET,
     { expiresIn: "7d" }
   )
 
-  return { user, token }
+  return { user, accessToken, refreshToken }
+}
+
+export const logoutUser = async (token) => {
+
+  await pool.query(
+    `INSERT INTO token_blacklist(token)
+     VALUES($1)`,
+    [token]
+  )
+
+  return { message: "Logged out successfully" }
 }
