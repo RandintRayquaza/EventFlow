@@ -1,29 +1,31 @@
+import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Login from '../features/auth/UI/Pages/Login';
-import Signup from '../features/auth/UI/Pages/Signup';
-import CreateEventPage from '../pages/layouts/CreateEventPage';
-import EventDetailsPage from '../pages/layouts/EventDetailsPage';
-import EventsPage from '../pages/layouts/EventsPage';
-import LandingPage from '../pages/layouts/LandingPage';
-import PlaceholderPage from '../pages/layouts/PlaceholderPage';
+
+const Login = lazy(() => import('../features/auth/UI/Pages/Login'));
+const Signup = lazy(() => import('../features/auth/UI/Pages/Signup'));
+const Landing = lazy(() => import('../features/landing/pages/Landing'));
+
+// Fallback loader while suspense resolves
+const PageLoader = () => (
+  <div className="flex h-screen w-full items-center justify-center bg-[var(--color-bg)]">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--color-border)] border-t-[var(--color-primary)]"></div>
+  </div>
+);
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage focusSection="top" />} />
-      <Route path="/featured-events" element={<Navigate to="/events" replace />} />
-      <Route path="/features" element={<LandingPage focusSection="features" />} />
-      <Route path="/how-it-works" element={<LandingPage focusSection="how-it-works" />} />
-      <Route path="/contact" element={<LandingPage focusSection="cta" />} />
-      <Route path="/events" element={<EventsPage />} />
-      <Route path="/events/new" element={<CreateEventPage />} />
-      <Route path="/events/:id" element={<EventDetailsPage />} />
-      <Route path="/pricing" element={<PlaceholderPage title="Pricing Plans" description="Pricing is being finalized for teams, communities, and enterprise programs." />} />
-      <Route path="/docs" element={<PlaceholderPage title="Documentation" description="Implementation guides and API references are being prepared for release." />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route path="/" element={<Landing focusSection="top" />} />
+        <Route path="/featured-events" element={<Landing focusSection="featured-events" />} />
+        <Route path="/features" element={<Landing focusSection="features" />} />
+        <Route path="/how-it-works" element={<Landing focusSection="how-it-works" />} />
+        <Route path="/contact" element={<Landing focusSection="cta" />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 };
 

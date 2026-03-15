@@ -1,10 +1,12 @@
 import { createElement } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { clsx } from 'clsx';
 
 const variantStyles = {
   primary:
-    'border border-[#38d76f]/60 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-[#05200f] shadow-[0_14px_40px_rgba(34,197,94,0.32)] hover:shadow-[0_18px_44px_rgba(34,197,94,0.42)]',
+    'border border-[var(--color-primary)] bg-[var(--color-primary)] text-[#05200f] hover:bg-white hover:border-white shadow-[0_0_20px_rgba(34,197,94,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]',
   secondary:
-    'border border-[var(--color-border)] bg-[rgba(255,255,255,0.03)] text-[var(--color-text)] hover:border-[#37d76e] hover:bg-[rgba(34,197,94,0.08)]',
+    'border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-strong)] hover:border-[#374151]',
 };
 
 const Button = ({
@@ -15,13 +17,14 @@ const Button = ({
   ...props
 }) => {
   const baseClassName =
-    'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300';
+    'inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-[14px] font-semibold transition-all duration-200';
+  
   const variantClassName = variantStyles[variant] ?? variantStyles.primary;
 
   return createElement(
     as,
     {
-      className: `${baseClassName} ${variantClassName} ${className}`,
+      className: twMerge(clsx(baseClassName, variantClassName, className)),
       ...props,
     },
     children,

@@ -19,10 +19,9 @@ const Preloader = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div ref={rootRef} className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b08]">
-      <div className="w-full max-w-sm px-8">
-        <p className="mb-4 text-xs uppercase tracking-[0.34em] text-[#97af9f]">Loading experience</p>
-        <h2 className="mb-8 overflow-hidden font-['Sora'] text-4xl font-semibold leading-none sm:text-5xl">
+    <div ref={rootRef} className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--color-bg)]">
+      <div className="w-full max-w-sm px-8 flex flex-col items-center text-center">
+        <h2 className="mb-8 overflow-hidden font-['Sora'] text-5xl font-bold leading-none tracking-tight text-[var(--color-text)]">
           {letters.map((letter, index) => (
             <span
               key={`${letter}-${index}`}
@@ -35,10 +34,10 @@ const Preloader = ({ onComplete }) => {
             </span>
           ))}
         </h2>
-        <div className="h-1.5 overflow-hidden rounded-full bg-[#163223]">
+        <div className="h-1 w-48 overflow-hidden rounded-full bg-[var(--color-surface-strong)] border border-[var(--color-border)]">
           <div
             ref={progressRef}
-            className="h-full w-0 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] shadow-[0_0_20px_rgba(34,197,94,0.55)]"
+            className="h-full w-0 rounded-full bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)]"
           />
         </div>
       </div>
