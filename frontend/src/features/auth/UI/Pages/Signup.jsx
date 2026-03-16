@@ -55,9 +55,8 @@ const SignUp = () => {
   
   useEffect(() => {
     if (error) dismissError();
-  }, [form.name, form.email, form.password, form.confirmPassword]);
-
-  const handleChange = (e) => {
+    }, [form.name, form.email, form.password, form.confirmPassword, error, dismissError]);
+    const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (fieldErrors[name]) setFieldErrors((prev) => ({ ...prev, [name]: "" }));

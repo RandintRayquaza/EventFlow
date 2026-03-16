@@ -72,7 +72,7 @@ const Footer = () => {
           <p>© {year} EventFlow Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span>Built with precision</span>
-            <div className="h-1 w-1 rounded-full bg-[var(--color-primary)]"></div>
+            <div className="h-1 w-1 rounded-full bg-white"></div>
             <span>System Status: All systems operational</span>
           </div>
         </div>

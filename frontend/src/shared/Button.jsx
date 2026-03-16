@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 
 const variantStyles = {
   primary:
-    'border border-[var(--color-primary)] bg-[var(--color-primary)] text-[#05200f] hover:bg-white hover:border-white shadow-[0_0_20px_rgba(34,197,94,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]',
+    'border border-[var(--color-primary)] bg-[var(--color-primary)] text-black hover:bg-gray-200 hover:border-gray-200 shadow-none hover:shadow-sm',
   secondary:
     'border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-strong)] hover:border-[#374151]',
 };

@@ -6,8 +6,8 @@ const Button = ({ children, onClick, type = "button", variant = "primary", fullW
 
   const styles = {
     primary: {
-      background: isDisabled ? "rgba(34,197,94,0.4)" : "var(--color-primary)",
-      color: "#050807",
+      background: isDisabled ? "rgba(255,255,255,0.4)" : "var(--color-primary)",
+      color: "#000000",
       border: "none",
     },
     outline: {
@@ -40,9 +40,9 @@ const Button = ({ children, onClick, type = "button", variant = "primary", fullW
       onMouseEnter={(e) => {
         if (isDisabled) return;
         if (variant === "primary") {
-          e.currentTarget.style.background = "var(--color-accent)";
+          e.currentTarget.style.background = "#e5e5e5";
           e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 6px 24px rgba(34,197,94,0.25)";
+          e.currentTarget.style.boxShadow = "0 6px 24px rgba(255,255,255,0.15)";
         } else {
           e.currentTarget.style.background = "var(--color-surface)";
           e.currentTarget.style.borderColor = "var(--color-text-muted)";

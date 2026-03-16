@@ -14,13 +14,7 @@ const navItems = [
 
 const navLinkClassName = ({ isActive }) => {
   return `rounded-full px-5 py-2 text-[13px] tracking-wide font-medium transition-all duration-300 ${
-    isActive ? 'text-emerald-400 bg-emerald-400/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
-  }`;
-};
-
-const actionLinkClassName = ({ isActive }) => {
-  return `rounded-md px-4 py-2 text-[14px] font-medium transition-colors ${
-    isActive ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white'
+    isActive ? 'text-black bg-white' : 'text-gray-400 hover:text-white hover:bg-white/10'
   }`;
 };
 
@@ -64,7 +58,7 @@ const Navbar = () => {
       >
         <div className={`mx-auto max-w-7xl rounded-2xl transition-all duration-500 overflow-hidden ${
           isScrolled 
-            ? 'bg-[#050a08]/70 backdrop-blur-2xl border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]' 
+            ? 'bg-black/80 backdrop-blur-2xl border border-white/10 shadow-sm' 
             : 'bg-transparent border-transparent'
         }`}>
           <div className="flex h-16 items-center justify-between px-6">
@@ -75,7 +69,7 @@ const Navbar = () => {
               <Logo />
             </motion.div>
             
-            <nav className="hidden items-center md:flex bg-white/5 p-1 rounded-full border border-white/5" aria-label="Main navigation">
+            <nav className="hidden items-center md:flex bg-black p-1 rounded-full border border-white/10" aria-label="Main navigation">
               {navItems.map((item, i) => (
                 <motion.div 
                   key={item.to}
@@ -96,10 +90,10 @@ const Navbar = () => {
               transition={{ delay: 0.4 }}
               className="hidden items-center md:flex"
             >
-              <Button as={NavLink} to="/login" variant="secondary" className="h-9 px-5 text-[13px] bg-transparent border-none text-gray-300 hover:text-white hover:bg-white/5 rounded-full mr-2">
+              <Button as={NavLink} to="/login" variant="secondary" className="h-9 px-5 text-[13px] bg-transparent border-none text-gray-300 hover:text-white hover:bg-white/10 rounded-full mr-2 transition-colors">
                 Log in
               </Button>
-              <Button as={NavLink} to="/signup" className="h-9 px-6 text-[13px] rounded-full shadow-[0_0_20px_rgba(34,197,94,0.15)] hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-shadow">
+              <Button as={NavLink} to="/signup" className="h-9 px-6 text-[13px] rounded-full bg-white text-black hover:bg-gray-200 transition-colors shadow-none">
                 Start for free
               </Button>
             </motion.div>
@@ -124,7 +118,7 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-4 top-24 z-40 rounded-3xl bg-[#09100d]/95 backdrop-blur-3xl border border-white/10 shadow-2xl md:hidden overflow-hidden"
+            className="fixed inset-4 top-24 z-40 rounded-3xl bg-[#000000]/95 backdrop-blur-3xl border border-[#262626] shadow-2xl md:hidden overflow-hidden"
           >
             <div className="h-full p-6 flex flex-col pt-10">
               <nav className="flex flex-col gap-4" aria-label="Mobile navigation">
@@ -135,7 +129,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.1 }}
                   >
-                    <NavLink to={item.to} end={item.to === '/'} className={({isActive}) => `block px-4 py-4 rounded-2xl text-[18px] font-medium transition-colors ${isActive ? 'bg-emerald-500/10 text-emerald-400' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}>
+                    <NavLink to={item.to} end={item.to === '/'} className={({isActive}) => `block px-4 py-4 rounded-2xl text-[18px] font-medium transition-colors ${isActive ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}>
                       {item.label}
                     </NavLink>
                   </motion.div>

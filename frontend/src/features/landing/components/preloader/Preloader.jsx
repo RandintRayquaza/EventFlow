@@ -34,10 +34,10 @@ const Preloader = ({ onComplete }) => {
             </span>
           ))}
         </h2>
-        <div className="h-1 w-48 overflow-hidden rounded-full bg-[var(--color-surface-strong)] border border-[var(--color-border)]">
+        <div className="h-1 w-48 overflow-hidden rounded-full bg-[#171717] border border-[#262626]">
           <div
             ref={progressRef}
-            className="h-full w-0 rounded-full bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)]"
+            className="h-full w-0 rounded-full bg-white shadow-none"
           />
         </div>
       </div>

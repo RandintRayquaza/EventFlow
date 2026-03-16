@@ -1,16 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatePresence } from 'framer-motion';
-import Cta from '../components/cta/Cta';
-import FeaturedEvents from '../components/featuredEvents/FeaturedEvents';
 import Footer from '../components/footer/Footer';
 import Hero from '../components/hero/Hero';
 import HowItWorks from '../components/howItWorks/HowItWorks';
 import Navbar from '../components/navbar/Navbar';
 import DualUserFlow from '../components/dualUserFlow/DualUserFlow';
-import EventTypes from '../components/eventTypes/EventTypes';
-import PaymentSecurity from '../components/paymentSecurity/PaymentSecurity';
 import Preloader from '../components/preloader/Preloader';
+import WhyChooseUs from '../components/whyChooseUs/WhyChooseUs';
+import Marquee from '../components/marquee/Marquee';
+import FeaturesSection from '../components/features/FeaturesSection';
 
 const Landing = ({ focusSection = 'top' }) => {
   const [preloaderDone, setPreloaderDone] = useState(false);
@@ -45,7 +44,7 @@ const Landing = ({ focusSection = 'top' }) => {
   }, [focusSection, preloaderDone]);
 
   return (
-    <div className="relative bg-[var(--color-bg)] text-[var(--color-text)]">
+    <div className="relative bg-[#000000] text-white">
       <AnimatePresence mode="wait">
         {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
       </AnimatePresence>
@@ -53,38 +52,39 @@ const Landing = ({ focusSection = 'top' }) => {
       <div className={`transition-opacity duration-1000 ${preloaderDone ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar />
         
-        {/* Layered Scrolling Architecture */}
-        <main ref={mainRef} className="relative">
-          <div className="relative w-full overflow-hidden z-10 bg-[var(--color-bg)] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        {/* Cinematic Layered Scrolling Architecture */}
+        <main ref={mainRef} className="relative bg-[#000000]">
+          
+          {/* Main Hero */}
+          <div className="relative z-10 w-full bg-[#000000]">
             <Hero />
           </div>
           
-          <div className="relative w-full z-10 bg-[var(--color-bg)]">
-            <EventTypes />
-          </div>
-          
-          <div className="sticky top-0 z-30 w-full bg-[var(--color-bg)] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+          {/* Large Scroll Headline sliding over Hero */}
+          <div className="relative z-20 w-full bg-[#0a0a0a] shadow-[0_-30px_60px_rgba(0,0,0,0.9)] border-t border-[#1a1a1a]">
             <DualUserFlow />
           </div>
           
-          <div className="relative w-full z-10 bg-[#0a120f] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+          {/* Pinned Workflow sliding over Headline */}
+          <div className="relative z-30 w-full bg-[#000000] shadow-[0_-30px_60px_rgba(0,0,0,1)] border-t border-[#262626]">
             <HowItWorks />
           </div>
-          
-          <div className="sticky top-0 z-50 w-full bg-[var(--color-bg)] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-            <FeaturedEvents />
+
+          <div className="relative z-30 w-full bg-[#0a0a0a] shadow-[0_-30px_60px_rgba(0,0,0,1)] border-t border-[#262626]">
+            <WhyChooseUs />
+          </div>
+
+          <div className="relative z-30 w-full bg-[#000000] border-t border-[#262626]">
+            <Marquee />
+          </div>
+
+          <div className="relative z-30 w-full bg-[#0a0a0a] border-t border-[#262626]">
+            <FeaturesSection />
           </div>
           
-          <div className="relative w-full z-10 bg-[#050a08] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-            <PaymentSecurity />
-          </div>
-          
-          <div className="relative w-full z-10 bg-[var(--color-bg)]">
-            <Cta />
-          </div>
         </main>
         
-        <div className="relative w-full z-10">
+        <div className="relative z-40 w-full bg-[#050505] shadow-[0_-20px_50px_rgba(0,0,0,1)] border-t border-[#1f1f1f]">
           <Footer />
         </div>
       </div>

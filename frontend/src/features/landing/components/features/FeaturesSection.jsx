@@ -8,7 +8,7 @@ const MotionCard = motion.article;
 
 const FeaturesSection = () => {
   return (
-    <Section id="features" className="bg-[var(--color-bg)] text-[var(--color-text)]">
+    <Section id="features" className="bg-[#0a0a0a] text-white py-32 border-t border-[#262626]">
       <div className="max-w-3xl mb-20 mx-auto text-center">
         <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-primary)]">Platform Previews</p>
         <h2 className="font-['Sora'] text-4xl md:text-5xl font-bold tracking-tight text-white">Experience The Workflow</h2>
@@ -31,7 +31,7 @@ const FeaturesSection = () => {
         >
           {/* UI Preview Side */}
           <div className="flex-1 p-8 md:p-12 lg:pr-6 flex items-center justify-center bg-[var(--color-bg)]/50 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.08)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none" />
             <div className="w-full max-w-md bg-[var(--color-surface-strong)] border border-[var(--color-border)] rounded-2xl p-6 shadow-2xl relative z-10">
               <div className="text-sm font-semibold text-white mb-5 pb-4 border-b border-[var(--color-border)] flex items-center gap-2">
                 <CalendarDays size={16} className="text-[var(--color-primary)]" />
@@ -73,7 +73,7 @@ const FeaturesSection = () => {
                   <div className="text-xs text-gray-400">Click to upload banner image</div>
                 </div>
                 <div className="pt-2">
-                  <div className="w-full bg-[var(--color-primary)] text-[var(--color-bg)] font-semibold rounded-lg py-2.5 text-center text-sm cursor-pointer shadow-[0_0_15px_rgba(34,197,94,0.2)]">Publish Event</div>
+                  <div className="w-full bg-[var(--color-primary)] text-[var(--color-bg)] font-semibold rounded-lg py-2.5 text-center text-sm cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.2)]">Publish Event</div>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@ const FeaturesSection = () => {
             <div className="w-full max-w-[320px] bg-[var(--color-surface-strong)] border border-[var(--color-border)] rounded-xl shadow-xl relative z-10">
               <div className="px-5 py-4 border-b border-[var(--color-border)] flex justify-between items-center">
                 <div className="text-sm font-semibold text-white">Event Team</div>
-                <div className="text-xs bg-[var(--color-primary)]/10 text-[var(--color-primary)] px-2 py-1 rounded-md font-medium">Invite</div>
+                <div className="text-xs bg-white text-black px-3 py-1.5 rounded-md font-semibold cursor-pointer hover:bg-gray-200 transition-colors">Invite</div>
               </div>
               <div className="p-2">
                 {[

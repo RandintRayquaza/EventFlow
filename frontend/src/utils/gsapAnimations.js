@@ -19,7 +19,7 @@ export const runPreloaderAnimation = ({ root, chars, progressFill, onComplete })
 
         // Initial setup
         timeline.set(chars, { yPercent: 100, opacity: 0, scale: 0.8, filter: 'blur(10px)' });
-        timeline.set(root, { opacity: 1, backgroundColor: '#030504' });
+        timeline.set(root, { opacity: 1, backgroundColor: '#000000' });
 
         timeline
             // Reveal letters and blur out
@@ -96,22 +96,21 @@ export const initScrollAnimations = () => {
         elements.forEach((el) => {
             gsap.fromTo(
                 el,
-                { opacity: 0, y: 50 },
+                { opacity: 0, y: 40 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: 1,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: el,
                         start: 'top 85%',
-                        once: true,
+                        toggleActions: 'play none none reverse',
                     },
                 }
             );
         });
         
-        // Ensure scroll triggers are properly calculated after DOM mutations (React strict rendering)
         ScrollTrigger.refresh();
     });
     
