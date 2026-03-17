@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { initLenisScroll } from './utils/lenisScroll';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   useEffect(() => {
@@ -8,7 +9,12 @@ const App = () => {
     return cleanup;
   }, []);
 
-  return <AppRoutes />;
+  return (
+    <>
+      <Toaster position="top-center" />
+      <AppRoutes />
+    </>
+  );
 };
 
 export default App;
