@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  clerk_id      String    @unique
+  email         String?   @unique
+  username      String    @unique
+  name          String
+  gender        String?
+  age           Int?
+  profile_image String?
+  skills        Json?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  bookings      Booking[]
+
+  @@index([clerk_id])
+}
+
+model Event {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String
+  description String?
+  starts_at   DateTime
+  ends_at     DateTime?
+  location    String?
+  capacity    Int?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  bookings    Booking[]
+}
+
+model Booking {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  event_id   String   @db.Uuid
+  status     String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  event      Event    @relation(fields: [event_id], references: [id], onDelete: Cascade)
+  payment    Payment?
+
+  @@unique([user_id, event_id])
+  @@index([user_id])
+  @@index([event_id])
+}
+
+model Payment {
+  id           String   @id @default(uuid()) @db.Uuid
+  booking_id   String   @unique @db.Uuid
+  amount       Int
+  currency     String   @default("USD")
+  status       String
+  provider_ref String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  booking      Booking  @relation(fields: [booking_id], references: [id], onDelete: Cascade)
+}
